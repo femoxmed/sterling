@@ -1,6 +1,18 @@
 version: "2"
 
 services:
+  redis:
+    container_name: redis-server
+    image: redis:5.0.5-alpine
+    ports:
+      - "6379:6379"
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+
   server:
     container_name: sterling-test-app-server
     restart: always
@@ -11,18 +23,4 @@ services:
       - ".:/usr/src/app"
       - "/usr/src/app/node_modules"
     links:
-      - redis
       - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
-    ports:
-      - "27017:27017"
-    links:
-      - redis
-
-  redis:
-    container_name: redis-server
-    image: redis:5.0.5-alpine
-    ports:
-      - "6379:6379"
