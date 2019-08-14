@@ -1,0 +1,32 @@
+version: "2"
+
+services:
+  # client:
+  #   container_name: courier-app-client
+  #   restart: always
+  #   build: client
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - "./client:/usr/src/app"
+  #     - "/usr/src/app/node_modules"
+  #   links:
+  #     - server
+  #changestatus
+  server:
+    container_name: sterling-test-app-server
+    restart: always
+    build: ./server
+    ports:
+      - "80:80"
+    volumes:
+      - "./server:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    links:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
