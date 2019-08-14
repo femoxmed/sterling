@@ -5,7 +5,7 @@ WORKDIR /usr/src/Sterling_app
 COPY package*.json /usr/src/Sterling_app/
 RUN npm cache clean -f
 RUN npm cache verify
-RUN npm install -f 
+RUN npm install 
 COPY  . /usr/src/sterling_app/
 EXPOSE 80
 ENV jwtPrivateKey=;lksdlkslakdlkdslk
