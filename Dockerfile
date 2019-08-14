@@ -7,9 +7,9 @@ RUN npm cache clean -f
 RUN npm cache verify
 RUN npm install -f 
 COPY  . /usr/src/app/
-EXPOSE 6000
+EXPOSE 80
 ENV jwtPrivateKey=;lksdlkslakdlkdslk
 ENV NODE_ENV production
-EXPOSE 6379
+# EXPOSE 6379
 CMD ["redis-server"]
 CMD [ "npm" , "start" ]
