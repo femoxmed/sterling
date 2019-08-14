@@ -11,12 +11,15 @@ services:
       - ".:/usr/src/app"
       - "/usr/src/app/node_modules"
     links:
+      - redis-server
       - mongo
   mongo:
     container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
+    links:
+      - redis-server
 
   redis:
     container_name: redis-server
