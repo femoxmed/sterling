@@ -2,7 +2,7 @@
 FROM node:8.11.2 as node-server
 RUN mkdir -p /usr/src/
 WORKDIR /usr/src/
-COPY package*.json /usr/src/
+COPY package*.json ./
 RUN npm cache clean -f
 RUN npm cache verify
 RUN npm install -f
