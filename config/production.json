@@ -1,0 +1,3 @@
+{
+    "DB_HOST": "mongodb://mongo_sterling:27017/sterling_app"
+}

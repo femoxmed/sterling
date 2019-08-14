@@ -85,7 +85,7 @@ describe("USERS", () => {
       .expect(response => {
         expect(email).toBe(response.body.email);
         expect(response.header)
-          .toHaveProperty("x-auth-token")
+          .toHaveProperty("xAuthToken")
           .end(done);
       });
     // make ur assertions
