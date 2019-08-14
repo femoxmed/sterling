@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:80"
     volumes:
-      - "./server:/usr/src/sterling_app"
+      - "./server:/usr/src/"
       - "/usr/src/Sterling_app/node_modules"
     links:
       - mongo
