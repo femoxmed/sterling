@@ -5,16 +5,16 @@ const PORT = 80 || process.env.PORT;
 var redis = require("redis");
 var session = require("express-session");
 var redisStore = require("connect-redis")(session);
-// var client = redis.createClient();
+var client = redis.createClient();
 
 app.use(
   session({
     secret: "session_key",
     // create new redis store.
     store: new redisStore({
-      host: "localhost",
+      host: "redis",
       port: 6379,
-      // client: client,
+      client: client,
       ttl: 260
     }),
     saveUninitialized: false,

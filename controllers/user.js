@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const { User, validate, loginValidate } = require("../models/User");
-const redis = require("redis");
-let client = redis.createClient();
 
 //register user
 const registerUser = async (req, res) => {
