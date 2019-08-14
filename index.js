@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 80 || process.env.PORT;
 
 var redis = require("redis");
 var session = require("express-session");
