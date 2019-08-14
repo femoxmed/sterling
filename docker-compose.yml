@@ -9,7 +9,7 @@ services:
       - "3000:80"
     volumes:
       - "./server:/usr/src/"
-      - "/usr/src/Sterling_app/node_modules"
+      - "/usr/src/node_modules"
     links:
       - mongo
   mongo:
