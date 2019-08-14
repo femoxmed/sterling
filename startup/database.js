@@ -14,7 +14,7 @@ module.exports = app => {
   mongoose
     .connect(DB_HOST, { useNewUrlParser: true })
     .then(() => {
-      // console.log(`Connected to  database successfully `);
+      console.log(`Connected to ${DB_HOST} database successfully `);
     })
     .catch(e => {
       // if any error throw the error
