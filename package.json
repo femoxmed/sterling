@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "jest --watchAll",
-        "start": "node index.js",
+        "start": "node index.js"
     },
     "author": "Oluwafemi Meduoye Adebola",
     "license": "ISC",
