@@ -4,7 +4,8 @@
     "description": "sterling test",
     "main": "index.js",
     "scripts": {
-        "test": "jest --watchAll"
+        "test": "jest --watchAll",
+        "start": "node index.js",
     },
     "author": "Oluwafemi Meduoye Adebola",
     "license": "ISC",
