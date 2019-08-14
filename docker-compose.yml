@@ -12,8 +12,8 @@ services:
       - "/usr/src/Sterling_app/node_modules"
     links:
       - mongo
-  # mongo:
-  #   container_name: mongo_sterling
-  #   image: mongo
-  #   ports:
-  #     - "27017:27017"
+  mongo:
+    container_name: mongo_sterling
+    image: mongo
+    ports:
+      - "27017:27018"
