@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": ""
+    "jwtPrivateKey": "",
+    "DB_HOST": "mongodb://localhost:27017/sterling_app"
 }

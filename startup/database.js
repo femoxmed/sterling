@@ -1,19 +1,20 @@
 const mongoose = require("mongoose");
+const config = require("config");
 
 module.exports = app => {
   let DB_HOST = "";
-
+  DB_HOST = config.get("DB_HOST");
   if (app.get("env") === "development") {
-    DB_HOST = "mongodb://localhost:27017/sterling_app";
-  } else {
+    DB_HOST = config.get("DB_HOST");
+  } else if (app.get("env") !== "test" || app.get("env") !== "development") {
     app.set("env", "production");
-    DB_HOST = "mongodb://mongo:27017/sterling_app";
+    DB_HOST = config.get("DB_HOST");
   }
 
   mongoose
     .connect(DB_HOST, { useNewUrlParser: true })
     .then(() => {
-      console.log("Database connected successfully ");
+      // console.log(`Connected to  database successfully `);
     })
     .catch(e => {
       // if any error throw the error

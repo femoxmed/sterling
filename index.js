@@ -25,9 +25,11 @@ app.use(
 require("./startup/database")(app);
 require("./startup/routes")(app);
 
-console.log(app.get("env"));
-console.log(process.env.jwtPrivateKey);
+console.log("Env:", app.get("env"));
+console.log("Jwt Private", process.env.jwtPrivateKey);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
 });
+
+module.exports = server;
