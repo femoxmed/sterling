@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 6000 || process.env.PORT;
+const PORT = process.env.PORT;
 
 var redis = require("redis");
 var session = require("express-session");
@@ -12,7 +12,7 @@ app.use(
     secret: "session_key",
     // create new redis store.
     store: new redisStore({
-      host: "127.0.0.1",
+      host: "localhost",
       port: 6379,
       client: client,
       ttl: 260
@@ -29,7 +29,7 @@ console.log("Env:", app.get("env"));
 console.log("Jwt Private", process.env.jwtPrivateKey);
 
 const server = app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
+  console.log(`server sstarted on port ${PORT}`);
 });
 
 module.exports = server;
