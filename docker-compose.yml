@@ -11,7 +11,7 @@ services:
       - ".:/usr/src/app"
       - "/usr/src/app/node_modules"
     links:
-      - redis-server
+      - redis
       - mongo
   mongo:
     container_name: mongo
@@ -19,7 +19,7 @@ services:
     ports:
       - "27017:27017"
     links:
-      - redis-server
+      - redis
 
   redis:
     container_name: redis-server
