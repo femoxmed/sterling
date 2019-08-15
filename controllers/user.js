@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
     // //set redis
     // //
     req.session.xAuthToken = user.generateAuthToken();
-    console.log(req.session.xAuthToken);
+    // console.log(req.session.xAuthToken);
     res.send(_.pick(user, ["_id", "email", "isAdmin"]));
   } catch (error) {
     // console.log({ error: error.message });
