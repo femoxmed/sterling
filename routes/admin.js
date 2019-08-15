@@ -36,7 +36,11 @@ const {
 } = require("../controllers/stadium");
 
 // //route to get all users
-router.post("/register-admin", [userAuth, adminAuth], registerAdminUser);
+router.post(
+  "/register-admin",
+  // [userAuth, adminAuth],
+  registerAdminUser
+);
 //route to get all users
 router.get("/getallusers", [userAuth, adminAuth], allUsers);
 

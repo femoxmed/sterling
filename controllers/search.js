@@ -3,7 +3,7 @@ const { Team } = require("../models/Team");
 
 const searchFixture = async (req, res) => {
   const ALLF = await Fixtures.find().populate("teamA teamB");
-  const team = await Team.find({ name: { $regex: req.body.name } });
+  const team = await Team.find({ name: { $regex: req.query.name } });
   if (team.length === 0) {
     res.send([]);
     return;
@@ -23,7 +23,7 @@ const searchFixture = async (req, res) => {
 };
 
 const searchTeam = async (req, res) => {
-  const team = await Team.find({ name: { $regex: req.body.name } });
+  const team = await Team.find({ name: { $regex: req.query.name } });
 
   res.send(team);
 };

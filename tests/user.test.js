@@ -2,22 +2,36 @@ const request = require("supertest");
 const bcrypt = require("bcrypt");
 
 const { User } = require("../models/User");
+let { server, client } = require("../index");
 
-let server;
-
-describe("USERS", () => {
-  const user = {
+const users = [
+  {
     email: "user1@admin.com",
     firstName: "nine",
     lastName: "sense",
     phoneNumber: "090000",
     password: "password",
-    confirm_password: "password"
-  };
+    confirm_password: "password",
+    isAdmin: true
+  },
+  {
+    email: "user2@user.com",
+    firstName: "user2",
+    lastName: "user2",
+    phoneNumber: "9999999",
+    password: "password",
+    confirm_password: "password",
+    isAdmin: false
+  }
+];
 
-  beforeEach(() => (server = require("../index")));
+describe(" /POST Register Users", () => {
+  beforeEach(() => {
+    // open the server on a separate test port
+    // server.listen(8888);
+  });
   afterEach(async () => {
-    server.close();
+    // server.close();
     await User.deleteMany();
   });
 
@@ -25,7 +39,7 @@ describe("USERS", () => {
     request(server)
       .post("/api/register")
       .set("Accept", "application/json")
-      .send(user)
+      .send(users[1])
       .expect(200)
       .expect(response => {
         expect(response.body).toBeDefined();
@@ -39,9 +53,9 @@ describe("USERS", () => {
         try {
           //   Query the database for the Added data
           const foundUser = await User.findOne({ email: user.email });
-          expect(foundUser.email).toBe(user.email);
+          expect(foundUser.email).toBe(users[1].email);
           expect(
-            bcrypt.compare(user.password, foundUser.password)
+            bcrypt.compare(users[1].password, foundUser.password)
           ).toBeTruthy();
           done();
         } catch (error) {
@@ -52,13 +66,14 @@ describe("USERS", () => {
 
   it("should not register user if email is taken", async done => {
     // We add the user before making the request
-    const newUser = new User(user);
+
+    const newUser = new User(users[1]);
     await newUser.save();
 
     // make the request
     request(server)
       .post("/api/register")
-      .send(user)
+      .send(users[1])
       .expect(400)
       .end(done);
   });
@@ -70,10 +85,16 @@ describe("USERS", () => {
       .expect(400)
       .end(done);
   });
+});
 
-  it("should login the user", done => {
+describe("/POST Login Users", () => {
+  it("should login the user", async done => {
+    //add the user before making the request
+    const user = new User(users[1]);
+    await user.save();
+
     //  get user auth
-    const { email, password } = user;
+    const { email, password } = users[1];
     // make the request
     request(server)
       .post("/api/login")
@@ -83,11 +104,24 @@ describe("USERS", () => {
       })
       .expect(200)
       .expect(response => {
-        expect(email).toBe(response.body.email);
-        expect(response.header)
-          .toHaveProperty("xAuthToken")
-          .end(done);
-      });
-    // make ur assertions
+        expect(response.body).toHaveProperty("_id");
+        expect(response.body).toHaveProperty("isAdmin");
+        expect(client.KEYS("xAuthToken")).toBeTruthy();
+      })
+      .end(done);
   });
+
+  it("should not login the user, no login credential", async done => {
+    request(server)
+      .post("/api/login")
+      .send({})
+      .expect(400)
+      .end(done);
+  });
+
+  // it("should get the current user", done => {
+  //   request(server)
+  //     .get("/api/users/me")
+  //     .done();
+  // });
 });
