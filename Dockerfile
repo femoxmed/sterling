@@ -12,6 +12,6 @@ COPY  . /usr/src/app/
 ENV jwtPrivateKey=;lksdlkslakdlkdslk
 ENV NODE_ENV production
 EXPOSE 6379
-# CMD ["redis-server"]
+CMD ["redis-server"]
 EXPOSE 80
 CMD [ "npm" , "start" ]
