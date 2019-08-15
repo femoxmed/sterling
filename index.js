@@ -12,7 +12,7 @@ app.use(
     secret: "session_key",
     // create new redis store.
     store: new redisStore({
-      host: "localhost",
+      host: "redis:redis",
       port: 6379,
       client: client,
       ttl: 260
