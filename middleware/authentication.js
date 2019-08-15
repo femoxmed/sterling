@@ -3,8 +3,7 @@ const config = require("config");
 
 const authenticate = (req, res, next) => {
   //  read the request header for the stored token in the header
-  const token = req.session.xAuthToken;
-  console.log({ middleware: token });
+  const token = req.header("x-auth-token");
   if (!token) {
     return res.status(401).send("Access denied. No token provided");
   }

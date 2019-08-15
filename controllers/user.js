@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const { User, validate, loginValidate } = require("../models/User");
-
+const { client } = require("../index");
 //register user
 const registerUser = async (req, res) => {
   // validate the request body
@@ -56,9 +56,12 @@ const loginUser = async (req, res) => {
     // let a = client.hmset("x-auth-token", ["token", user.generateAuthToken()]);
     // //set redis
     // //
-    req.session.xAuthToken = user.generateAuthToken();
+    // client.hset(id, user.generateAuthToken());
+    // req.session.xAuthToken = user.generateAuthToken();
     // console.log(req.session.xAuthToken);
-    res.send(_.pick(user, ["_id", "email", "isAdmin"]));
+    res
+      .header("x-auth-token", user.generateAuthToken())
+      .send(_.pick(user, ["_id", "email", "isAdmin"]));
   } catch (error) {
     // console.log({ error: error.message });
     // res.sendStatus(500);
