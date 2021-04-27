@@ -22,7 +22,7 @@
         "moment": "^2.24.0",
         "mongoose": "^5.6.9",
         "node-uuid": "^1.4.8",
-        "redis": "^2.8.0"
+        "redis": "^3.1.1"
     },
     "devDependencies": {
         "jest": "^24.8.0",
